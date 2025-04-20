@@ -30,13 +30,10 @@ INSTALLED_APPS = [
     "rest_framework",
     "django_filters",
     "rest_framework_simplejwt",
-    "drf_yasg",
     "corsheaders",
     "django_extensions",
     "drf_spectacular",
     "users",
-    "ads",
-    "reviews",
 ]
 
 REST_FRAMEWORK = {
@@ -244,8 +241,6 @@ CORS_ALLOW_ALL_ORIGINS = False
 # Дополнительные настройки для разработки
 CORS_ALLOW_CREDENTIALS = True
 
-# настройки для телеграм - бота
-TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 
 # CICD ([flake8])
 # это нужно, чтобы при запуске тестов использовалась легкая SQLite, а не PostgreSQL

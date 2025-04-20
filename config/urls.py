@@ -17,9 +17,9 @@ schema_view = get_schema_view(
     openapi.Info(
         title="API Documentation",
         default_version="v1",
-        description="API adHub",
+        description="API DigitalBazaar",
         terms_of_service="https://www.example.com/policies/terms/",
-        contact=openapi.Contact(email="contact@example.com"),
+        contact=openapi.Contact(email="slobodyanik.ed@gmail.com"),
         license=openapi.License(name="BSD License"),
     ),
     public=True,
@@ -29,8 +29,6 @@ schema_view = get_schema_view(
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("users/", include("users.urls", namespace="users")),
-    path("ads/", include("ads.urls", namespace="ads")),
-    path("reviews/", include("reviews.urls", namespace="reviews")),
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     path(
         "swagger/", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger-ui"
