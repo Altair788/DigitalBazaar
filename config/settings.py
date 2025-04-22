@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     "django_extensions",
     "drf_spectacular",
     "users",
+    "network_nodes",
 ]
 
 REST_FRAMEWORK = {
