@@ -99,3 +99,8 @@ class NetworkNodeSerializer(serializers.ModelSerializer):
         validator = NetworkNodeValidator()
         validator(data)
         return data
+
+    def update(self, instance, validated_data):
+        # Удаляем debt_to_supplier, если он пришёл в запросе
+        validated_data.pop('debt_to_supplier', None)
+        return super().update(instance, validated_data)
