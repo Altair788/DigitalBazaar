@@ -1,24 +1,29 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
 
 from network_nodes.models import NetworkNode
 from network_nodes.paginations import NetworkNodePaginator
 from network_nodes.serializers import NetworkNodeSerializer
-from users.permissions import CanViewAPI
+
 from network_nodes.filters import NetworkNodeFilter
+from users.permissions import IsActiveEmployee, IsAdmin
 
 
-class NetworkNodeCreateAPIView(generics.ListCreateAPIView):
+class NetworkNodeCreateAPIView(generics.CreateAPIView):
     """
     Cоздание звеньев сети с фильтрацией по стране.
     """
     serializer_class = NetworkNodeSerializer
     queryset = NetworkNode.objects.all()
-    permission_classes = (CanViewAPI,)
+    permission_classes = (
+        IsAuthenticated,
+        IsActiveEmployee
+    )
 
 
 
-class NetworkNodeListAPIView(generics.ListCreateAPIView):
+class NetworkNodeListAPIView(generics.ListAPIView):
     """
     Список звеньев сети с фильтрацией по стране.
     """
@@ -27,8 +32,10 @@ class NetworkNodeListAPIView(generics.ListCreateAPIView):
     pagination_class = NetworkNodePaginator
     filter_backends = [DjangoFilterBackend]
     filterset_class = NetworkNodeFilter
-    permission_classes = (CanViewAPI,)
-
+    permission_classes = (
+        IsAuthenticated,
+        IsActiveEmployee
+    )
 
 class NetworkNodeRetrieveAPIView(generics.RetrieveAPIView):
     """
@@ -36,15 +43,20 @@ class NetworkNodeRetrieveAPIView(generics.RetrieveAPIView):
     """
     serializer_class = NetworkNodeSerializer
     queryset = NetworkNode.objects.all()
-    permission_classes = (CanViewAPI,)
-
+    permission_classes = (
+        IsAuthenticated,
+        IsActiveEmployee
+    )
 class NetworkNodeUpdateAPIView(generics.UpdateAPIView):
     """
     Обновление звена сети (запрещено менять задолженность через API).
     """
     serializer_class = NetworkNodeSerializer
     queryset = NetworkNode.objects.all()
-    permission_classes = (CanViewAPI,)
+    permission_classes = (
+        IsAuthenticated,
+        IsActiveEmployee
+    )
 
 class NetworkNodeDestroyAPIView(generics.DestroyAPIView):
     """
@@ -52,4 +64,7 @@ class NetworkNodeDestroyAPIView(generics.DestroyAPIView):
     """
     serializer_class = NetworkNodeSerializer
     queryset = NetworkNode.objects.all()
-    permission_classes = (CanViewAPI,)
+    permission_classes = (
+        IsAuthenticated,
+        IsActiveEmployee
+    )
