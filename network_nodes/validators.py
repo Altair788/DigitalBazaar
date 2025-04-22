@@ -23,7 +23,6 @@ class NetworkNodeValidator:
         if "email" in data:
             self.validate_email(data["email"])
 
-
         # Проверка страны
         if "country" in data:
             self.validate_country(data["country"])
@@ -44,10 +43,11 @@ class NetworkNodeValidator:
         if "debt_to_supplier" in data:
             self.validate_debt(data["debt_to_supplier"])
 
-
     def validate_name(self, name: str) -> None:
         if not name or len(name.strip()) < 2:
-            raise ValidationError("Название звена сети должно содержать минимум 2 символа.")
+            raise ValidationError(
+                "Название звена сети должно содержать минимум 2 символа."
+            )
 
     def validate_node_type(self, node_type: str) -> None:
         if node_type not in dict(NetworkNode.NODE_TYPE_CHOICES):
@@ -56,7 +56,6 @@ class NetworkNodeValidator:
     def validate_email(self, email: str) -> None:
         if not email or "@" not in email:
             raise ValidationError("Некорректный email.")
-
 
     def validate_country(self, country: str) -> None:
         if not country or len(country.strip()) < 2:

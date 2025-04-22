@@ -1,7 +1,8 @@
-from network_nodes.models import NetworkNode
+from django.contrib import admin
 from django.urls import reverse
 from django.utils.html import format_html
-from django.contrib import admin
+
+from network_nodes.models import NetworkNode
 
 
 @admin.register(NetworkNode)
@@ -27,11 +28,10 @@ class NetworkNodeAdmin(admin.ModelAdmin):
     def supplier_link(self, obj):
         if obj.supplier:
             url = reverse(
-                'admin:{}_{}_change'.format(
-                    obj.supplier._meta.app_label,
-                    obj.supplier._meta.model_name
+                "admin:{}_{}_change".format(
+                    obj.supplier._meta.app_label, obj.supplier._meta.model_name
                 ),
-                args=[obj.supplier.id]
+                args=[obj.supplier.id],
             )
             return format_html('<a href="{}">{}</a>', url, obj.supplier.name)
         return "-"

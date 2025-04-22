@@ -2,11 +2,13 @@ import logging
 from datetime import date
 
 from django.core.management.base import BaseCommand
+
 from network_nodes.models import NetworkNode, Product
 
 # Настройка логирования
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
 
 def fill_db():
     logger.info("Заполнение базы тестовыми звеньями сети и продуктами...")
@@ -20,7 +22,7 @@ def fill_db():
         country="Россия",
         city="Москва",
         street="Электрозаводская",
-        house_number="1"
+        house_number="1",
     )
     logger.info(f"Создан завод: {factory}")
 
@@ -35,7 +37,7 @@ def fill_db():
         street="Технологическая",
         house_number="10",
         supplier=factory,
-        debt_to_supplier="100000.00"
+        debt_to_supplier="100000.00",
     )
     logger.info(f"Создана розничная сеть: {retail}")
 
@@ -50,7 +52,7 @@ def fill_db():
         street="Предпринимательская",
         house_number="5",
         supplier=retail,
-        debt_to_supplier="25000.00"
+        debt_to_supplier="25000.00",
     )
     logger.info(f"Создан индивидуальный предприниматель: {individual}")
 
@@ -65,7 +67,7 @@ def fill_db():
         street="Маркетная",
         house_number="7",
         supplier=factory,
-        debt_to_supplier="50000.00"
+        debt_to_supplier="50000.00",
     )
     logger.info(f"Создана розничная сеть: {retail2}")
 
@@ -75,25 +77,25 @@ def fill_db():
             name="Смартфон X1",
             model="X1-2024",
             release_date=date(2024, 3, 1),
-            network_node=factory
+            network_node=factory,
         ),
         Product.objects.create(
             name="Ноутбук Pro",
             model="Pro-15",
             release_date=date(2023, 12, 15),
-            network_node=retail
+            network_node=retail,
         ),
         Product.objects.create(
             name="Планшет Mini",
             model="Mini-8",
             release_date=date(2024, 1, 20),
-            network_node=individual
+            network_node=individual,
         ),
         Product.objects.create(
             name="Телевизор UltraHD",
             model="UHD-55",
             release_date=date(2023, 11, 5),
-            network_node=retail2
+            network_node=retail2,
         ),
     ]
     for product in products:
@@ -101,8 +103,9 @@ def fill_db():
 
     logger.info("База успешно заполнена!")
 
+
 class Command(BaseCommand):
-    help = 'Заполняет базу тестовыми данными для демонстрации'
+    help = "Заполняет базу тестовыми данными для демонстрации"
 
     def handle(self, *args, **kwargs):
         fill_db()
