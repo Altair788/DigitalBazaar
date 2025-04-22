@@ -7,9 +7,20 @@ from network_nodes.serializers import NetworkNodeSerializer
 from users.permissions import CanViewAPI
 from network_nodes.filters import NetworkNodeFilter
 
-class NetworkNodeListCreateAPIView(generics.ListCreateAPIView):
+
+class NetworkNodeCreateAPIView(generics.ListCreateAPIView):
     """
-    Список и создание звеньев сети с фильтрацией по стране.
+    Cоздание звеньев сети с фильтрацией по стране.
+    """
+    serializer_class = NetworkNodeSerializer
+    queryset = NetworkNode.objects.all()
+    permission_classes = (CanViewAPI,)
+
+
+
+class NetworkNodeListAPIView(generics.ListCreateAPIView):
+    """
+    Список звеньев сети с фильтрацией по стране.
     """
     serializer_class = NetworkNodeSerializer
     queryset = NetworkNode.objects.all().order_by("-created_at")
@@ -17,6 +28,7 @@ class NetworkNodeListCreateAPIView(generics.ListCreateAPIView):
     filter_backends = [DjangoFilterBackend]
     filterset_class = NetworkNodeFilter
     permission_classes = (CanViewAPI,)
+
 
 class NetworkNodeRetrieveAPIView(generics.RetrieveAPIView):
     """
