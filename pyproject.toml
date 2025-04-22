@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "sb1-diploma"
+name = "digital-bazaar"
 version = "0.1.0"
 description = ""
 authors = ["Eduard Slobodyanik <slobodyanik.ed@gmail.com>"]
@@ -23,7 +23,6 @@ django-filter = "^25.1"
 djangorestframework-simplejwt = "^5.5.0"
 ipython = "^9.0.2"
 coverage = "^7.6.12"
-drf-yasg = "^1.21.10"
 django-cors-headers = "^4.7.0"
 requests = "^2.32.3"
 celery = "^5.4.0"
@@ -55,4 +54,6 @@ omit = [
     "config/wsgi.py",
     "users/tests.py",
     "tests.py",
+    "check_code_quality.py",
+    "fill_db.py",
 ]

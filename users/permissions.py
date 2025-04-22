@@ -1,13 +1,10 @@
 from rest_framework import permissions
 
-#
-# class CanViewAPI(permissions.BasePermission):
-#     """
-#     Разрешение для просмотра API только администраторам.
-#     """
-#
-#     def has_permission(self, request, view):
-#         return request.user.is_staff
+# users/permissions.py
+class IsActiveEmployee(permissions.BasePermission):
+    def has_permission(self, request, view):
+        return request.user.is_authenticated and request.user.is_active and request.user.is_staff
+
 
 
 class IsAdmin(permissions.BasePermission):
@@ -17,14 +14,3 @@ class IsAdmin(permissions.BasePermission):
 
     def has_permission(self, request, view):
         return request.user.groups.filter(name="admins").exists()
-
-
-class IsAuthor(permissions.BasePermission):
-    """
-    Проверяет, является ли пользователь владельцем.
-    """
-
-    def has_object_permission(self, request, view, obj):
-        if obj.author == request.user:
-            return True
-        return False

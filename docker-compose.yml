@@ -1,7 +1,7 @@
 # 1
 services:
   backend:
-    container_name: adhub-backend
+    container_name: digital_bazaar-backend
     build: .
     command: >
       sh -c "python manage.py migrate &&
@@ -24,7 +24,7 @@ services:
 
 
   db:
-    container_name: adhub-db
+    container_name: digital_bazaar-db
     image: postgres:16.0
     env_file:
       - .env
