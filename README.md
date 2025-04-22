@@ -194,7 +194,7 @@ python3 manage.py loaddata users/fixtures/groups.json
 docker-compose up -d --build
 ```
 
-Приложение будет доступно по адресу http://localhost:80.
+Приложение будет доступно по адресу http://localhost:8082.
 
 ## API Документация
 
