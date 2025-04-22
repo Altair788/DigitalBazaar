@@ -23,9 +23,6 @@ class NetworkNodeValidator:
         if "email" in data:
             self.validate_email(data["email"])
 
-        # Проверка телефона
-        if "phone" in data:
-            self.validate_phone(data["phone"])
 
         # Проверка страны
         if "country" in data:
@@ -47,11 +44,6 @@ class NetworkNodeValidator:
         if "debt_to_supplier" in data:
             self.validate_debt(data["debt_to_supplier"])
 
-        # Проверка поставщика и бизнес-логики иерархии
-        if "node_type" in data or "supplier" in data:
-            node_type = data.get("node_type")
-            supplier = data.get("supplier")
-            self.validate_supplier(node_type, supplier)
 
     def validate_name(self, name: str) -> None:
         if not name or len(name.strip()) < 2:
