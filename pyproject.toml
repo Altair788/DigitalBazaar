@@ -54,4 +54,6 @@ omit = [
     "config/wsgi.py",
     "users/tests.py",
     "tests.py",
+    "check_code_quality.py",
+    "fill_db.py",
 ]
