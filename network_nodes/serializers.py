@@ -1,3 +1,4 @@
+from phonenumber_field.serializerfields import PhoneNumberField
 from rest_framework import serializers
 
 from network_nodes.models import NetworkNode, Product
@@ -32,7 +33,7 @@ class NetworkNodeSerializer(serializers.ModelSerializer):
         required=True,
         error_messages={"required": "Электронная почта обязательна для заполнения."}
     )
-    phone = serializers.CharField(
+    phone = PhoneNumberField(
         allow_null=True,
         required=False,
         help_text="Укажите телефон"
