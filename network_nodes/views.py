@@ -6,7 +6,7 @@ from network_nodes.filters import NetworkNodeFilter
 from network_nodes.models import NetworkNode
 from network_nodes.paginations import NetworkNodePaginator
 from network_nodes.serializers import NetworkNodeSerializer
-from users.permissions import IsActiveEmployee
+from users.permissions import IsActiveEmployee, IsAdmin
 
 
 class NetworkNodeCreateAPIView(generics.CreateAPIView):
@@ -16,7 +16,7 @@ class NetworkNodeCreateAPIView(generics.CreateAPIView):
 
     serializer_class = NetworkNodeSerializer
     queryset = NetworkNode.objects.all()
-    permission_classes = (IsAuthenticated, IsActiveEmployee)
+    permission_classes = (IsAuthenticated, IsActiveEmployee | IsAdmin)
 
 
 class NetworkNodeListAPIView(generics.ListAPIView):
@@ -29,7 +29,7 @@ class NetworkNodeListAPIView(generics.ListAPIView):
     pagination_class = NetworkNodePaginator
     filter_backends = [DjangoFilterBackend]
     filterset_class = NetworkNodeFilter
-    permission_classes = (IsAuthenticated, IsActiveEmployee)
+    permission_classes = (IsAuthenticated, IsActiveEmployee | IsAdmin)
 
 
 class NetworkNodeRetrieveAPIView(generics.RetrieveAPIView):
@@ -39,7 +39,7 @@ class NetworkNodeRetrieveAPIView(generics.RetrieveAPIView):
 
     serializer_class = NetworkNodeSerializer
     queryset = NetworkNode.objects.all()
-    permission_classes = (IsAuthenticated, IsActiveEmployee)
+    permission_classes = (IsAuthenticated, IsActiveEmployee | IsAdmin)
 
 
 class NetworkNodeUpdateAPIView(generics.UpdateAPIView):
@@ -49,7 +49,7 @@ class NetworkNodeUpdateAPIView(generics.UpdateAPIView):
 
     serializer_class = NetworkNodeSerializer
     queryset = NetworkNode.objects.all()
-    permission_classes = (IsAuthenticated, IsActiveEmployee)
+    permission_classes = (IsAuthenticated, IsActiveEmployee | IsAdmin)
 
 
 class NetworkNodeDestroyAPIView(generics.DestroyAPIView):
@@ -59,4 +59,4 @@ class NetworkNodeDestroyAPIView(generics.DestroyAPIView):
 
     serializer_class = NetworkNodeSerializer
     queryset = NetworkNode.objects.all()
-    permission_classes = (IsAuthenticated, IsActiveEmployee)
+    permission_classes = (IsAuthenticated, IsAdmin)
