@@ -55,7 +55,7 @@ class NetworkNode(models.Model):
     )
 
     street = models.CharField(
-        NULLABLE, max_length=100, verbose_name="Улица", help_text="Укажите улицу"
+        max_length=100, verbose_name="Улица", help_text="Укажите улицу", blank=True
     )
 
     house_number = models.CharField(
@@ -64,11 +64,11 @@ class NetworkNode(models.Model):
 
     supplier = models.ForeignKey(
         "self",
-        NULLABLE,
         on_delete=models.SET_NULL,
         related_name="children",
         verbose_name="Поставщик",
         help_text="Предыдущее звено в сети",
+        **NULLABLE
     )
 
     debt_to_supplier = models.DecimalField(
