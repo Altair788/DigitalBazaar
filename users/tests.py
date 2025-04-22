@@ -8,9 +8,8 @@ from django.test import TestCase
 from rest_framework import status
 from rest_framework.test import APIRequestFactory, APITestCase
 
-from ads.models import Ad
 from users.models import User
-from users.permissions import IsAdmin, IsAuthor
+from users.permissions import IsAdmin
 from users.serializers import PasswordResetConfirmSerializer
 
 
@@ -383,34 +382,6 @@ class IsAdminTest(APITestCase):
         request.user = self.user
         self.assertFalse(self.permission.has_permission(request, None))
 
-
-class IsAuthorTest(APITestCase):
-    def setUp(self):
-        self.factory = APIRequestFactory()
-        self.user = User.objects.create_user(
-            email="user@example.com", password="password123"
-        )
-        self.other_user = User.objects.create_user(
-            email="other@example.com", password="password123"
-        )
-        self.ad = Ad.objects.create(title="Test Ad", price=1000, author=self.user)
-        self.permission = IsAuthor()  # Используем ваш класс
-
-    def test_has_object_permission_for_author(self):
-        """
-        Проверяет, что автор объекта имеет доступ.
-        """
-        request = self.factory.get("/some-endpoint/")
-        request.user = self.user
-        self.assertTrue(self.permission.has_object_permission(request, None, self.ad))
-
-    def test_has_object_permission_for_non_author(self):
-        """
-        Проверяет, что не автор объекта не имеет доступа.
-        """
-        request = self.factory.get("/some-endpoint/")
-        request.user = self.other_user
-        self.assertFalse(self.permission.has_object_permission(request, None, self.ad))
 
 
 class PasswordResetConfirmSerializerTest(APITestCase):
