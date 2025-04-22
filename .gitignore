@@ -172,3 +172,4 @@ cython_debug/
 
 .notes
 check_code_quality.py
+ coverage_report.txt
