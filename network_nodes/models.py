@@ -99,20 +99,27 @@ class NetworkNode(models.Model):
 
     def clean(self):
         """
-        Проверка бизнес-логики на уровне модели (для валидации в админ - панели)
+        Полная проверка бизнес-логики сети
         """
+        errors = {}
 
         # Завод не может иметь поставщика
         if self.node_type == self.FACTORY and self.supplier:
-            raise ValidationError("Завод не может иметь поставщика")
+            errors.setdefault('__all__', []).append('Завод не может иметь поставщика')
 
         # Проверка циклических зависимостей
         if self.supplier and self.supplier.id == self.id:
-            raise ValidationError("Объект не может быть своим собственным поставщиком")
+            errors.setdefault('__all__', []).append('Объект не может быть своим собственным поставщиком')
 
-        # Проверка на глубину иерархии
-        if self.supplier and self.supplier.level >= 2:
-            raise ValidationError("Максимальный уровень иерархии - 2")
+        # Проверка максимального уровня иерархии
+        if self.supplier:
+            if not hasattr(self.supplier, 'level'):
+                errors.setdefault('__all__', []).append('Не удалось определить уровень поставщика')
+            elif self.supplier.level >= 2:
+                errors.setdefault('__all__', []).append('Максимальный уровень иерархии - 2')
+
+        if errors:
+            raise ValidationError(errors)
 
     def __repr__(self) -> str:
         """Строковое представление объекта для разработки"""
