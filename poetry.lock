@@ -717,31 +717,6 @@ offline = ["drf-spectacular-sidecar"]
 sidecar = ["drf-spectacular-sidecar"]
 
 [[package]]
-name = "drf-yasg"
-version = "1.21.10"
-description = "Automated generation of real Swagger/OpenAPI 2.0 schemas from Django Rest Framework code."
-optional = false
-python-versions = ">=3.6"
-groups = ["main"]
-files = [
-    {file = "drf-yasg-1.21.10.tar.gz", hash = "sha256:f86d50faee3c31fcec4545985a871f832366c7fb5b77b62c48089d56ecf4f8d4"},
-    {file = "drf_yasg-1.21.10-py3-none-any.whl", hash = "sha256:4d832e108dfe38e365101c36123576b498487d33bf27d57d6a37efb4cc773438"},
-]
-
-[package.dependencies]
-django = ">=2.2.16"
-djangorestframework = ">=3.10.3"
-inflection = ">=0.3.1"
-packaging = ">=21.0"
-pytz = ">=2021.1"
-pyyaml = ">=5.1"
-uritemplate = ">=3.0.0"
-
-[package.extras]
-coreapi = ["coreapi (>=2.3.3)", "coreschema (>=0.0.4)"]
-validation = ["swagger-spec-validator (>=2.1.0)"]
-
-[[package]]
 name = "executing"
 version = "2.2.0"
 description = "Get the currently executing AST node of a frame, and other information"
@@ -1679,18 +1654,6 @@ text-unidecode = ">=1.3"
 unidecode = ["Unidecode (>=1.1.1)"]
 
 [[package]]
-name = "pytz"
-version = "2025.2"
-description = "World timezone definitions, modern and historical"
-optional = false
-python-versions = "*"
-groups = ["main"]
-files = [
-    {file = "pytz-2025.2-py2.py3-none-any.whl", hash = "sha256:5ddf76296dd8c44c26eb8f4b6f35488f3ccbf6fbbd7adee0b7262d43f0ec2f00"},
-    {file = "pytz-2025.2.tar.gz", hash = "sha256:360b9e3dbb49a209c21ad61809c7fb453643e048b38924c765813546746e81c3"},
-]
-
-[[package]]
 name = "pyyaml"
 version = "6.0.2"
 description = "YAML parser and emitter for Python"
@@ -2120,4 +2083,4 @@ dev = ["black (>=19.3b0) ; python_version >= \"3.6\"", "pytest (>=4.6.2)"]
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.12"
-content-hash = "d488cbd3eb5e0ea61b5e3810f64ea0ea3a547105621fba3615cd202980db250c"
+content-hash = "505b9d8279d237a28a31ae6360dfb525179d63db5e0386dd4f39990af343bfc3"
