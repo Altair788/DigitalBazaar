@@ -137,3 +137,51 @@ level={self.level})"""
         verbose_name = "Звено сети"
         verbose_name_plural = "Звенья сети"
         ordering = ["-created_at"]
+
+
+
+class Product(models.Model):
+    """
+    Модель продукта, связанного с конкретным звеном сети.
+    """
+    name = models.CharField(
+        max_length=255,
+        verbose_name="Название продукта",
+        help_text="укажите название продукта"
+    )
+    model = models.CharField(
+        max_length=255,
+        verbose_name="Модель продукта",
+        help_text="укажите модель продукта"
+    )
+    release_date = models.DateField(
+        verbose_name="Дата выхода на рынок",
+        help_text="укажите дату выхода на рынок"
+    )
+    network_node = models.ForeignKey(
+        'network_nodes.NetworkNode',
+        on_delete=models.CASCADE,
+        related_name='products',
+        verbose_name="Звено сети"
+    )
+
+
+    def __repr__(self):
+        return (
+f"Product(id={self.id}, name='{self.name}', model='{self.model}', "
+f"release_date={self.release_date}, network_node_id={self.network_node_id})"
+        )
+
+    def __str__(self):
+        return f"{self.name} ({self.model})"
+
+
+    class Meta:
+        verbose_name = "Продукт"
+        verbose_name_plural = "Продукты"
+        constraints = [
+            models.UniqueConstraint(
+                fields=["network_node", "name", "model"],
+                name="unique_product_per_node"
+            )
+        ]
