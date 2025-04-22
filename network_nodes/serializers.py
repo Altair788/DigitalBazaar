@@ -1,13 +1,22 @@
 from rest_framework import serializers
 
-from network_nodes.models import NetworkNode
+from network_nodes.models import NetworkNode, Product
 from network_nodes.validators import NetworkNodeValidator
 
+
+class ProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = ["id", "name", "model", "release_date"]
 
 class NetworkNodeSerializer(serializers.ModelSerializer):
     """
     Сериализатор для модели NetworkNode.
     """
+    products = ProductSerializer(
+        many=True,
+        read_only=True
+    )
 
     id = serializers.IntegerField(read_only=True)
     name = serializers.CharField(
@@ -90,6 +99,7 @@ class NetworkNodeSerializer(serializers.ModelSerializer):
             "debt_to_supplier", # не обязателен для заполнения, по умолчанию 0
             "created_at", # только для чтения
             "level", # только для чтения
+            "products", # только для чтения
         ]
 
     def validate(self, data):
